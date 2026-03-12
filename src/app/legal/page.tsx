@@ -5,10 +5,10 @@ import LegalPageTemplate from '@/components/LegalPageTemplate'
 export default function LegalPage() {
   return (
     <LegalPageTemplate
-      tag="Legal"
+      tag="LEGAL DISCLAIMER"
       title="Legal"
-      titleEm="Disclaimer"
-      date="March 2026"
+      titleEm="disclaimer."
+      updatedDate="March 2026"
       sections={[
         { title: '1. General Disclaimer', content: 'The information provided on this website and by Boost with Launchpad ("Company," "we," "us") is for general informational purposes only. While we strive to keep information accurate and current, we make no representations or warranties of any kind, express or implied, about the completeness, accuracy, reliability, suitability, or availability of the website or the information, products, services, or related graphics contained on the website for any purpose.' },
         { title: '2. No Guaranteed Results', content: 'Case studies, testimonials, and performance metrics presented on this website reflect results achieved for specific clients under specific circumstances. Past performance does not guarantee future results. Individual outcomes vary based on factors including industry, market conditions, existing infrastructure, and the scope of engagement. All statistics labeled "up to" or with similar qualifiers represent best-case or upper-range outcomes observed across our client base.' },

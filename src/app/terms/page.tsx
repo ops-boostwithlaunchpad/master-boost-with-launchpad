@@ -5,10 +5,10 @@ import LegalPageTemplate from '@/components/LegalPageTemplate'
 export default function TermsPage() {
   return (
     <LegalPageTemplate
-      tag="Legal"
+      tag="TERMS OF SERVICE"
       title="Terms of"
-      titleEm="Service"
-      date="March 2026"
+      titleEm="service."
+      updatedDate="March 2026"
       sections={[
         { title: '1. Agreement to Terms', content: 'By accessing or using services provided by Boost with Launchpad ("Company," "we," "us"), you agree to be bound by these Terms of Service. If you do not agree to these terms, you may not use our services. These terms apply to all clients, visitors, and users of our platform and website.' },
         { title: '2. Services', content: 'We provide marketing, automation, CRM, and AI agent services as described in your specific service agreement. The scope, deliverables, timelines, and fees for each engagement are defined in individual Statements of Work (SOWs) or service agreements executed between you and the Company.' },
