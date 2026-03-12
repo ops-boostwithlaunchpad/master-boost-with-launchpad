@@ -5,10 +5,10 @@ import LegalPageTemplate from '@/components/LegalPageTemplate'
 export default function PrivacyPage() {
   return (
     <LegalPageTemplate
-      tag="PRIVACY POLICY"
-      title="Your privacy"
-      titleEm="matters."
-      updatedDate="March 2026"
+      tag="Legal"
+      title="Privacy"
+      titleEm="Policy"
+      date="March 2026"
       sections={[
         { title: '1. Information We Collect', content: 'We collect information you provide directly, including your name, email address, phone number, company name, and any other details submitted through our contact forms, onboarding process, or client portal. We also automatically collect usage data such as IP addresses, browser type, pages visited, and interaction patterns through cookies and similar technologies.' },
         { title: '2. How We Use Your Information', content: 'We use your information to provide and improve our services, communicate with you about your account, send marketing and operational updates, process transactions, analyze platform usage, and comply with legal obligations. We may also use aggregated data for internal research and performance benchmarking.' },

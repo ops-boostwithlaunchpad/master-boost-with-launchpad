@@ -1,473 +1,195 @@
 'use client'
 
 import Link from 'next/link'
-import { motion } from 'framer-motion'
+import { Footer, ArrowIcon, useScrollReveal } from '../layout'
 
-/* ── Animation helpers ── */
-const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: (i: number = 0) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.7, ease: 'easeOut', delay: i * 0.12 },
-  }),
-}
-
-const stagger = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.12 } },
-}
-
-const vp = { once: true, margin: '-12% 0px' as const }
-
-/* ── Arrow Icon ── */
-function ArrowIcon() {
-  return (
-    <svg
-      viewBox="0 0 11 11"
-      className="w-[11px] h-[11px] stroke-current stroke-2 fill-none transition-transform group-hover:translate-x-0.5"
-    >
-      <path d="M2 5.5h7M5.5 2l3.5 3.5L5.5 9" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  )
-}
-
-/* ── Page ── */
 export default function PlatformPage() {
+  useScrollReveal()
+
   return (
     <>
-      {/* ─── 1. HERO ─── */}
-      <section className="pt-32 pb-12 px-6 md:px-8 lg:px-16 xl:px-24 bg-white">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={vp}
-          variants={stagger}
-          className="max-w-5xl"
-        >
-          <motion.div
-            variants={fadeUp}
-            custom={0}
-            className="text-xs font-medium tracking-widest uppercase text-slate-400 mb-6"
-          >
-            <span className="opacity-40">&mdash; </span>The Platform
-          </motion.div>
+      <div className="chero" style={{ paddingBottom: '4rem' }}>
+        <div className="tag o sr" style={{ marginBottom: '1.5rem' }}>The Platform</div>
+        <h1 className="chero-h sr d1">Boost grows your<br />topline. Automation<br />runs the <em>backend.</em></h1>
+        <p className="chero-p sr d2">Launchpad Boost handles SEO, Google Ads, LSA, and Meta Ads to drive customers to you. Launchpad Automation handles AI agents, CRM, data management, and workflow automation so every lead is captured, qualified, followed up, and closed — without manual work.</p>
+        <div className="sr d3" style={{ marginTop: '1.5rem' }}>
+          <Link href="/contact" className="btn btn-dk">Schedule a call <ArrowIcon /></Link>
+        </div>
+      </div>
 
-          <motion.h1
-            variants={fadeUp}
-            custom={1}
-            className="font-serif text-4xl md:text-5xl font-normal tracking-tight leading-[1.05] text-slate-900 max-w-[800px] mb-6"
-          >
-            Boost grows your <em className="italic bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-500 bg-clip-text text-transparent">topline.</em>
-            <br />
-            Automation runs the <em className="italic bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-500 bg-clip-text text-transparent">backend.</em>
-          </motion.h1>
-
-          <motion.p
-            variants={fadeUp}
-            custom={2}
-            className="text-base text-slate-500 leading-relaxed max-w-[580px]"
-          >
-            Launchpad Boost handles SEO, Google Ads, LSA, and Meta Ads to drive customers to you.
-            Launchpad Automation handles AI agents, CRM, data management, and workflow automation so
-            every lead is captured, qualified, followed up, and closed — without manual work.
-          </motion.p>
-
-          <motion.div variants={fadeUp} custom={3} className="mt-8">
-            <Link
-              href="/contact"
-              className="group inline-flex items-center gap-2 bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 text-white text-sm font-medium tracking-wide uppercase px-8 py-3.5 rounded-full hover:shadow-lg hover:shadow-indigo-500/25 transition-all duration-300"
-            >
-              Schedule a call <ArrowIcon />
-            </Link>
-          </motion.div>
-        </motion.div>
+      {/* Dashboard Bento */}
+      <section className="bento-section-dark sr">
+        <div className="bento-hdr">
+          <div className="tag" style={{ color: 'rgba(255,255,255,.22)', marginBottom: '1rem' }}>Launchpad Boost — Dashboard Preview</div>
+          <h2 style={{ fontFamily: 'var(--fs)', fontSize: 'clamp(2rem,4vw,4rem)', fontWeight: 400, letterSpacing: '-.04em', lineHeight: '.9', color: '#fff' }}>See your SEO & ads<br />performance. <em style={{ fontStyle: 'italic', color: 'var(--org)' }}>One view.</em></h2>
+        </div>
+        <div className="bento-grid-dark">
+          <div className="bc bc-tall">
+            <div className="bc-label">Keyword Rankings — Illustrative</div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 0, marginTop: '.5rem' }}>
+              {[
+                { pos: '1', kw: 'personal injury lawyer miami', change: '▲ 4', up: true },
+                { pos: '2', kw: 'accident attorney hialeah', change: '▲ 7', up: true },
+                { pos: '3', kw: 'car accident lawyer near me', change: '▼ 1', up: false },
+                { pos: '5', kw: 'abogado de accidentes', change: '▲ 12', up: true },
+                { pos: '4', kw: 'slip and fall attorney fl', change: '—', up: false },
+              ].map((r, i) => (
+                <div key={i} className="rr">
+                  <div className="rr-pos">{r.pos}</div>
+                  <div className="rr-kw">{r.kw}</div>
+                  <div className={r.change.includes('▲') ? 'rr-up' : r.change.includes('▼') ? 'rr-dn' : 'rr-nc'}>{r.change}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="bc bc-wide">
+            <div className="bc-label">Lead Funnel — This Month</div>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '5px', padding: '.5rem 0', marginTop: '.5rem' }}>
+              {[
+                { label: 'Impressions', w: '95%', val: '24,800' },
+                { label: 'Clicks', w: '65%', val: '3,420' },
+                { label: 'Leads', w: '35%', val: '412' },
+                { label: 'Qualified', w: '20%', val: '187' },
+                { label: 'Closed', w: '10%', val: '38' },
+              ].map((f, i) => (
+                <div key={i} className="fb-step" style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+                  <div style={{ height: '34px', background: 'var(--org)', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '2px', width: f.w, transition: 'width 1.2s cubic-bezier(.22,1,.36,1)' }}>
+                    <span style={{ fontSize: '.5rem', fontWeight: 500, color: '#fff', letterSpacing: '.07em', textTransform: 'uppercase', whiteSpace: 'nowrap', padding: '0 12px' }}>{f.label} · {f.val}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="bc">
+            <div className="bc-label">Channel Mix</div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', marginTop: '.8rem' }}>
+              {[
+                { color: 'var(--org)', label: 'Organic SEO', val: '38%' },
+                { color: 'var(--blue)', label: 'Google Ads', val: '28%' },
+                { color: 'var(--purple)', label: 'Meta Ads', val: '18%' },
+                { color: 'var(--yellow)', label: 'Referral', val: '10%' },
+                { color: 'var(--pink)', label: 'LSA', val: '6%' },
+              ].map((c, i) => (
+                <div key={i} className="dl-item">
+                  <div className="dl-dot" style={{ width: '7px', height: '7px', borderRadius: '1px', flexShrink: 0, background: c.color }} />
+                  <div className="dl-lbl">{c.label}</div>
+                  <div className="dl-val">{c.val}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="bc">
+            <div className="bc-label">Average ROI</div>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '.6rem 0', marginTop: '.4rem' }}>
+              <div style={{ fontFamily: 'var(--fs)', fontSize: '1.8rem', fontWeight: 400, color: '#fff', letterSpacing: '-.04em' }}>5.2x</div>
+              <div style={{ fontSize: '.5rem', color: 'rgba(255,255,255,.25)', textTransform: 'uppercase', letterSpacing: '.1em', marginTop: '.7rem' }}>Across all campaigns</div>
+            </div>
+          </div>
+          <div className="bc">
+            <div className="bc-label">Leads This Month — Illustrative</div>
+            <div style={{ marginTop: '.5rem' }}>
+              <div style={{ fontFamily: 'var(--fs)', fontSize: '3.8rem', fontWeight: 400, color: '#fff', lineHeight: 1, letterSpacing: '-.05em' }}>127</div>
+              <div style={{ fontSize: '.56rem', color: 'rgba(255,255,255,.25)', marginTop: '.4rem' }}>Verified leads generated</div>
+              <div style={{ display: 'inline-block', fontSize: '.5rem', color: 'var(--org)', background: 'rgba(13,148,136,.1)', padding: '3px 10px', marginTop: '.7rem', letterSpacing: '.06em', textTransform: 'uppercase' }}>+34% vs last month</div>
+            </div>
+          </div>
+        </div>
       </section>
 
-      {/* ─── 2. LAUNCHPAD BOOST DASHBOARD (Dark Bento Grid) ─── */}
-      <motion.section
-        initial="hidden"
-        whileInView="visible"
-        viewport={vp}
-        variants={stagger}
-        className="py-20 px-6 md:px-8 lg:px-16 xl:px-24 bg-slate-50 border-b border-stone-100"
-      >
-        <motion.div variants={fadeUp} custom={0} className="mb-10">
-          <div className="text-xs tracking-widest uppercase text-indigo-600 mb-4">
-            Launchpad Boost &mdash; Dashboard Preview
-          </div>
-          <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-normal tracking-tight leading-[1.05] text-slate-900">
-            See your SEO &amp; ads<br />performance. <em className="italic bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">One view.</em>
-          </h2>
-        </motion.div>
-
-        <motion.div
-          variants={fadeUp}
-          custom={1}
-          className="grid grid-cols-1 md:grid-cols-[1.1fr_2fr_1fr] md:grid-rows-2 gap-4"
-        >
-          {/* Cell 1 — Keyword Rankings (tall, spans 2 rows) */}
-          <div className="bg-white rounded-2xl p-6 border border-stone-100 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 md:row-span-2">
-            <div className="text-xs tracking-widest uppercase text-indigo-600 mb-3 flex items-center gap-2">
-              Keyword Rankings
-              <span className="w-[6px] h-[6px] rounded-full bg-indigo-500 animate-pulse" />
-            </div>
-            <div className="flex flex-col mt-2">
+      {/* Automation Section */}
+      <div style={{ borderTop: '1px solid var(--s1)' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', borderBottom: '1px solid var(--s1)' }} className="pf-row">
+          <div style={{ padding: '5rem 48px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
               {[
-                { kw: 'personal injury lawyer', pos: '#2', change: '+4' },
-                { kw: 'car accident attorney miami', pos: '#1', change: '+7' },
-                { kw: 'slip and fall lawyer fl', pos: '#3', change: '+2' },
-                { kw: 'abogado de accidentes', pos: '#5', change: '+12' },
-                { kw: 'accident attorney hialeah', pos: '#4', change: '+3' },
-              ].map((r, i) => (
-                <div key={i} className="flex justify-between items-center py-2.5 border-b border-slate-100">
-                  <span className="text-xs text-slate-500">{r.kw}</span>
-                  <span className="flex items-center gap-2">
-                    <span className="font-mono text-sm bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent font-semibold">{r.pos}</span>
-                    <span className="font-mono text-xs text-green-600">{r.change}</span>
-                  </span>
+                { t: 'AI Chat & Lead Capture', d: 'A 24/7 AI assistant on your website that qualifies leads, answers questions, and books appointments — even while you sleep.' },
+                { t: 'Missed Call Text-Back', d: 'Every missed call gets an instant automated text. Never lose a lead just because you couldn\'t pick up.' },
+                { t: 'SMS & Email Sequences', d: 'Multi-step follow-up that fires in seconds. Nurture leads from first contact to booked job — automatically.' },
+                { t: 'Appointment Booking', d: 'Customers book 24/7. Automated confirmations and reminders cut no-shows and keep your calendar full.' },
+              ].map((f, i) => (
+                <div key={i} className={`pfeat sr${i > 0 ? ` d${i}` : ''}`} style={{ border: 'none', borderBottom: i < 3 ? '1px solid var(--s1)' : 'none', padding: '1.8rem 0' }}>
+                  <div className="pfeat-t">{f.t}</div>
+                  <div className="pfeat-d">{f.d}</div>
                 </div>
               ))}
             </div>
           </div>
-
-          {/* Cell 2 — Lead Funnel (wide, spans 2 cols) */}
-          <div className="bg-white rounded-2xl p-6 border border-stone-100 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 md:col-span-2">
-            <div className="text-xs tracking-widest uppercase text-indigo-600 mb-3 flex items-center gap-2">
-              Lead Funnel &mdash; This Month
-            </div>
-            <div className="flex flex-wrap items-center justify-between gap-3 mt-4">
-              {[
-                { label: 'Impressions', val: '14,200' },
-                { label: 'Clicks', val: '1,840' },
-                { label: 'Leads', val: '127' },
-                { label: 'Qualified', val: '84' },
-                { label: 'Closed', val: '31' },
-              ].map((step, i, arr) => (
-                <div key={i} className="flex items-center gap-4">
-                  <div className="flex flex-col items-center">
-                    <span className="font-mono text-xl text-slate-900 font-semibold">{step.val}</span>
-                    <span className="text-xs text-slate-500 uppercase tracking-wider mt-1">{step.label}</span>
-                  </div>
-                  {i < arr.length - 1 && (
-                    <span className="text-slate-300 text-sm">&rarr;</span>
-                  )}
-                </div>
-              ))}
-            </div>
+          <div style={{ padding: '5rem 48px', borderLeft: '1px solid var(--s1)' }}>
+            <div className="tag o sr" style={{ marginBottom: '1.2rem' }}>Launchpad Automation</div>
+            <h2 style={{ fontFamily: 'var(--fs)', fontSize: 'clamp(1.8rem,3vw,2.8rem)', fontWeight: 400, letterSpacing: '-.04em', lineHeight: '.95', color: 'var(--ink)', marginBottom: '1.5rem' }} className="sr d1">The backend that<br />never <em style={{ fontStyle: 'italic', color: 'var(--org)' }}>sleeps.</em></h2>
+            <p style={{ fontSize: '.78rem', color: 'var(--mid)', lineHeight: 1.9, marginBottom: '2rem' }} className="sr d2">Boost drives leads to your door. Automation makes sure every single one gets a response in seconds — AI-powered intake, qualification, follow-up, and CRM management running 24/7 without human intervention.</p>
+            <Link href="/contact" className="btn btn-dk sr d3">See how it works <ArrowIcon /></Link>
           </div>
-
-          {/* Cell 3 — Channel Mix */}
-          <div className="bg-white rounded-2xl p-6 border border-stone-100 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-            <div className="text-xs tracking-widest uppercase text-indigo-600 mb-3">
-              Channel Mix
-            </div>
-            <div className="flex flex-col gap-2.5 mt-3">
-              {[
-                { color: 'bg-indigo-500', label: 'Organic', val: '38%' },
-                { color: 'bg-blue-500', label: 'Google Ads', val: '28%' },
-                { color: 'bg-purple-500', label: 'Meta', val: '18%' },
-                { color: 'bg-yellow-400', label: 'Referral', val: '10%' },
-                { color: 'bg-pink-500', label: 'LSA', val: '6%' },
-              ].map((c, i) => (
-                <div key={i} className="flex items-center gap-2.5">
-                  <span className={`w-2 h-2 rounded-sm shrink-0 ${c.color}`} />
-                  <span className="text-sm text-slate-500 flex-1">{c.label}</span>
-                  <span className="font-mono text-sm text-slate-700">{c.val}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Cell 4 — Average ROI */}
-          <div className="bg-white rounded-2xl p-6 border border-stone-100 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-center">
-            <div className="text-xs tracking-widest uppercase text-indigo-600 mb-4 self-start">
-              Average ROI
-            </div>
-            <div className="font-serif text-5xl bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent tracking-tight font-semibold">5.2x</div>
-            <div className="text-xs text-slate-500 uppercase tracking-wider mt-3">
-              Across all campaigns
-            </div>
-          </div>
-
-          {/* Cell 5 — Leads This Month */}
-          <div className="bg-white rounded-2xl p-6 border border-stone-100 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-            <div className="text-xs tracking-widest uppercase text-indigo-600 mb-3 flex items-center gap-2">
-              Leads This Month
-              <span className="w-[6px] h-[6px] rounded-full bg-indigo-500 animate-pulse" />
-            </div>
-            <div className="mt-2">
-              <div className="font-serif text-5xl text-slate-900 leading-none tracking-tight">127</div>
-              <div className="text-sm text-green-600 mt-3">+18% vs last month</div>
-            </div>
-          </div>
-        </motion.div>
-      </motion.section>
-
-      {/* ─── 3. AUTOMATION FEATURES (2-column) ─── */}
-      <motion.section
-        initial="hidden"
-        whileInView="visible"
-        viewport={vp}
-        variants={stagger}
-        className="py-20 px-6 md:px-8 lg:px-16 xl:px-24 bg-slate-50/50"
-      >
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
-          {/* Left — Feature cards */}
-          <motion.div variants={fadeUp} custom={0} className="flex flex-col gap-4">
-            {[
-              {
-                t: 'AI Chat & Lead Capture',
-                d: 'A 24/7 AI assistant on your website that qualifies leads, answers questions, and books appointments — even while you sleep.',
-              },
-              {
-                t: 'Missed Call Text-Back',
-                d: "Every missed call gets an instant automated text. Never lose a lead just because you couldn't pick up.",
-              },
-              {
-                t: 'SMS & Email Sequences',
-                d: 'Multi-step follow-up that fires in seconds. Nurture leads from first contact to booked job — automatically.',
-              },
-              {
-                t: 'Appointment Booking',
-                d: 'Customers book 24/7. Automated confirmations and reminders cut no-shows and keep your calendar full.',
-              },
-            ].map((f, i) => (
-              <div
-                key={i}
-                className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 border border-slate-100"
-              >
-                <div className="text-sm font-semibold text-slate-900 mb-2">
-                  {f.t}
-                </div>
-                <div className="text-sm text-slate-500 leading-relaxed">{f.d}</div>
-              </div>
-            ))}
-          </motion.div>
-
-          {/* Right — Heading + body + CTA */}
-          <motion.div variants={fadeUp} custom={1} className="md:sticky md:top-32">
-            <div className="text-xs font-medium tracking-widest uppercase text-slate-400 mb-4">
-              <span className="opacity-40">&mdash; </span>Launchpad Automation
-            </div>
-            <h2 className="font-serif text-3xl md:text-4xl italic text-slate-900 mb-5 leading-[1.05] tracking-tight">
-              The backend that never <em className="not-italic bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-500 bg-clip-text text-transparent">sleeps.</em>
-            </h2>
-            <p className="text-base text-slate-500 leading-relaxed mb-8">
-              Boost drives leads to your door. Automation makes sure every single one gets a response
-              in seconds — AI-powered intake, qualification, follow-up, and CRM management running 24/7
-              without human intervention.
-            </p>
-            <Link
-              href="/contact"
-              className="group inline-flex items-center gap-2 bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 text-white text-sm font-medium tracking-wide uppercase px-8 py-3.5 rounded-full hover:shadow-lg hover:shadow-indigo-500/25 transition-all duration-300"
-            >
-              See how it works <ArrowIcon />
-            </Link>
-          </motion.div>
         </div>
-      </motion.section>
+      </div>
 
-      {/* ─── 4. AI AGENT DEMO (Dark Grid) ─── */}
-      <motion.section
-        initial="hidden"
-        whileInView="visible"
-        viewport={vp}
-        variants={stagger}
-        className="py-20 px-6 md:px-8 lg:px-16 xl:px-24 bg-white border-b border-stone-100 relative overflow-hidden"
-      >
-        <motion.div variants={fadeUp} custom={0} className="relative z-10 mb-10">
-          <div className="text-xs tracking-widest uppercase text-indigo-600 mb-4">
-            Launchpad Automation &mdash; AI Agents Live Preview
-          </div>
-          <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-normal tracking-tight leading-[1.05] text-slate-900 mb-6">
-            Your backend AI workforce.<br />
-            <em className="italic bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">Always on.</em>
-          </h2>
-        </motion.div>
-
-        <motion.div
-          variants={fadeUp}
-          custom={1}
-          className="relative z-10 grid grid-cols-1 md:grid-cols-3 md:grid-rows-2 gap-4"
-        >
-          {/* Cell 1 — AI Chat (tall, spans 2 rows) */}
-          <div className="bg-white rounded-2xl p-6 border border-stone-100 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 md:row-span-2">
-            <div className="text-xs tracking-widest uppercase text-indigo-600 mb-4 flex items-center gap-2">
-              AI Chat &mdash; Website
-              <span className="w-[6px] h-[6px] rounded-full bg-indigo-500 animate-pulse" />
-            </div>
-            <div className="flex flex-col gap-3 mt-2">
+      {/* AI Agent Demo */}
+      <section className="agent-section sr">
+        <div style={{ fontSize: '.5rem', letterSpacing: '.16em', textTransform: 'uppercase', color: 'rgba(255,255,255,.18)', marginBottom: '1rem', position: 'relative', zIndex: 2 }}>Launchpad Automation — AI Agents Live Preview</div>
+        <h2 style={{ fontFamily: 'var(--fs)', fontSize: 'clamp(2rem,4vw,3.5rem)', fontWeight: 400, letterSpacing: '-.04em', lineHeight: '.9', color: '#fff', marginBottom: '3rem', position: 'relative', zIndex: 2 }}>Your backend AI workforce.<br /><em style={{ fontStyle: 'italic', color: 'var(--org)' }}>Always on.</em></h2>
+        <div className="agent-grid">
+          <div className="agent-cell agent-tall">
+            <div className="agent-cell-label">AI Chat — Website <span className="ag-pulse" style={{ width: '5px', height: '5px', borderRadius: '50%', background: 'var(--org)', animation: 'agPulse 2s infinite', flexShrink: 0 }} /></div>
+            <div className="chat-msgs">
               {[
-                { type: 'visitor' as const, text: 'Hi, I was in a car accident last week and I think I need a lawyer.' },
-                { type: 'system' as const, text: '— AI agent activated —' },
-                { type: 'ai' as const, text: 'I can help connect you with our personal injury team right away. Were there any injuries?' },
-                { type: 'visitor' as const, text: 'Yes, I went to the ER. Whiplash and a broken wrist.' },
-                { type: 'ai' as const, text: 'That qualifies for a free case evaluation. Can I get your name and phone number?' },
+                { type: 'visitor', text: 'Hi, I was in a car accident last week and I think I need a lawyer.' },
+                { type: 'system', text: '— AI agent activated —' },
+                { type: 'ai', text: 'I can help connect you with our personal injury team right away. Were there any injuries?' },
+                { type: 'visitor', text: 'Yes, I went to the ER. Whiplash and a broken wrist.' },
+                { type: 'ai', text: 'That qualifies for a free case evaluation. Can I get your name and phone number?' },
               ].map((m, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.15, duration: 0.4 }}
-                  className={`text-sm leading-relaxed px-3.5 py-2.5 rounded-xl max-w-[90%] ${
-                    m.type === 'visitor'
-                      ? 'bg-slate-100 text-slate-600 self-start rounded-bl-sm'
-                      : m.type === 'ai'
-                      ? 'bg-indigo-50 text-indigo-700 self-end rounded-br-sm'
-                      : 'font-mono text-xs text-slate-300 self-center'
-                  }`}
-                >
-                  {m.text}
-                </motion.div>
+                <div key={i} className={`chat-msg ${m.type}`} style={{ animationDelay: `${i * 0.3}s` }}>{m.text}</div>
               ))}
             </div>
           </div>
-
-          {/* Cell 2 — Lead Routing */}
-          <div className="bg-white rounded-2xl p-6 border border-stone-100 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-            <div className="text-xs tracking-widest uppercase text-indigo-600 mb-4">
-              Lead Routing
-            </div>
+          <div className="agent-cell">
+            <div className="agent-cell-label">Lead Routing</div>
             {[
-              { name: 'Maria Gonzalez', dot: 'bg-indigo-400', status: 'routed', cls: 'bg-indigo-50 text-indigo-600' },
-              { name: 'David Chen', dot: 'bg-yellow-400', status: 'qualifying', cls: 'bg-blue-50 text-blue-600' },
-              { name: 'James Wilson', dot: 'bg-blue-400', status: 'booked', cls: 'bg-green-50 text-green-600' },
+              { name: 'Maria Gonzalez', dot: 'hot', status: 'routed', text: 'ROUTED' },
+              { name: 'David Chen', dot: 'warm', status: 'qualifying', text: 'QUALIFYING' },
+              { name: 'James Wilson', dot: 'new', status: 'qualifying', text: 'AI CHAT' },
             ].map((r, i) => (
-              <div key={i} className="flex items-center gap-3 py-3 border-b border-slate-100">
-                <span className={`w-2 h-2 rounded-full shrink-0 ${r.dot}`} />
-                <span className="text-sm text-slate-500 flex-1">{r.name}</span>
-                <span className={`font-mono text-xs px-2 py-0.5 rounded uppercase ${r.cls}`}>
-                  {r.status}
-                </span>
+              <div key={i} className="route-item" style={{ animationDelay: `${i * 0.2}s` }}>
+                <div className={`route-dot ${r.dot}`} />
+                <div className="route-name">{r.name}</div>
+                <div className={`route-status ${r.status}`}>{r.text}</div>
               </div>
             ))}
           </div>
-
-          {/* Cell 3 — Activity Feed */}
-          <div className="bg-white rounded-2xl p-6 border border-stone-100 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-            <div className="text-xs tracking-widest uppercase text-indigo-600 mb-4">
-              Activity Feed
-            </div>
+          <div className="agent-cell">
+            <div className="agent-cell-label">Activity Feed</div>
             {[
               { time: 'Just now', text: 'Maria Gonzalez routed to Hialeah intake' },
               { time: '12s ago', text: 'SMS confirmation sent to +1 786-555-0142' },
               { time: '28s ago', text: 'AI qualified lead — PI / Auto Accident' },
-              { time: '1m ago', text: 'New chat session started from Google Ads' },
-              { time: '2m ago', text: 'Appointment confirmed for Sandra Reyes' },
             ].map((a, i) => (
-              <div key={i} className="flex gap-3 py-2.5 border-b border-slate-100">
-                <span className="font-mono text-xs text-slate-300 w-16 shrink-0">{a.time}</span>
-                <span className="text-sm text-slate-500">{a.text}</span>
+              <div key={i} style={{ padding: '8px 0', borderBottom: '1px solid rgba(255,255,255,.04)' }}>
+                <div style={{ fontFamily: 'var(--mono)', fontSize: '.42rem', color: 'rgba(255,255,255,.15)', marginBottom: '3px' }}>{a.time}</div>
+                <div style={{ fontSize: '.56rem', color: 'rgba(255,255,255,.4)', lineHeight: 1.5 }}>{a.text}</div>
               </div>
             ))}
           </div>
-
-          {/* Cell 4 — Outbound SMS (wide, spans 2 cols) */}
-          <div className="bg-white rounded-2xl p-6 border border-stone-100 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 md:col-span-2">
-            <div className="text-xs tracking-widest uppercase text-indigo-600 mb-4">
-              Outbound SMS &mdash; Auto-Triggered Responses
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-2">
+          <div className="agent-cell agent-wide">
+            <div className="agent-cell-label">Outbound SMS — Auto-Triggered Responses</div>
+            <div className="sms-preview">
               {[
-                {
-                  trigger: 'Chat lead qualified',
-                  to: '+1 786-555-0142',
-                  body: 'Hi Maria, this is Launchpad confirming your case evaluation. A team member will call within 2 minutes.',
-                  badge: 'sent',
-                },
-                {
-                  trigger: 'Missed call text-back',
-                  to: '+1 832-555-0287',
-                  body: 'Hi David, thanks for reaching out. An attorney will review your case and follow up today.',
-                  badge: 'queued',
-                },
-                {
-                  trigger: 'Appointment reminder',
-                  to: '+1 305-555-0193',
-                  body: 'Hi Sandra, your appointment is confirmed for today at 3:00 PM. Reply STOP to cancel.',
-                  badge: 'sent',
-                },
+                { to: '+1 786-555-0142', trigger: 'Chat lead qualified', body: 'Hi Maria, this is Launchpad confirming your case evaluation. A team member will call within 2 minutes.', badge: 'sent' },
+                { to: '+1 832-555-0287', trigger: 'Missed call text-back', body: 'Hi David, thanks for reaching out. An attorney will review your case and follow up today.', badge: 'queued' },
+                { to: '+1 305-555-0193', trigger: 'Appointment reminder', body: 'Hi Sandra, your appointment is confirmed for today at 3:00 PM. Reply STOP to cancel.', badge: 'sent' },
               ].map((s, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 12 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.12, duration: 0.5 }}
-                  className="bg-slate-50 border border-slate-100 p-4 rounded-xl"
-                >
-                  <div className="font-mono text-xs text-indigo-600 tracking-wide uppercase mb-1.5">
-                    &#9656; {s.trigger}
-                  </div>
-                  <div className="font-mono text-xs text-slate-300 mb-2">TO: {s.to}</div>
-                  <div className="text-sm text-slate-500 leading-relaxed mb-3">{s.body}</div>
-                  <span
-                    className={`font-mono text-xs uppercase tracking-wider px-2 py-0.5 rounded ${
-                      s.badge === 'sent'
-                        ? 'bg-green-50 text-green-600'
-                        : 'bg-yellow-50 text-yellow-600'
-                    }`}
-                  >
-                    {s.badge}
-                  </span>
-                </motion.div>
+                <div key={i} className="sms-card" style={{ animationDelay: `${i * 0.2}s` }}>
+                  <div style={{ fontFamily: 'var(--mono)', fontSize: '.36rem', color: 'var(--org)', letterSpacing: '.06em', textTransform: 'uppercase', marginBottom: '4px', opacity: .7 }}>▸ {s.trigger}</div>
+                  <div className="sms-to">TO: {s.to}</div>
+                  <div className="sms-body">{s.body}</div>
+                  <div className={`sms-badge ${s.badge}`}>{s.badge}</div>
+                </div>
               ))}
             </div>
           </div>
-        </motion.div>
-      </motion.section>
-
-      {/* ─── 5. CTA BAND ─── */}
-      <motion.section
-        initial="hidden"
-        whileInView="visible"
-        viewport={vp}
-        variants={stagger}
-        className="py-16 px-6 md:px-8 lg:px-16 xl:px-24 bg-white border-t border-stone-100"
-      >
-        <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-10 items-center">
-          <motion.h2
-            variants={fadeUp}
-            custom={0}
-            className="font-serif text-3xl md:text-4xl lg:text-5xl font-normal tracking-tight leading-[1.05] text-slate-900"
-          >
-            See the <em className="italic bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-500 bg-clip-text text-transparent">results.</em>
-          </motion.h2>
-          <motion.div variants={fadeUp} custom={1}>
-            <Link
-              href="/results"
-              className="group inline-flex items-center gap-2 bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-700 text-white shadow-md hover:shadow-xl hover:-translate-y-0.5 text-sm font-medium tracking-wide uppercase px-8 py-3.5 rounded-full transition-all duration-300"
-            >
-              View case studies <ArrowIcon />
-            </Link>
-          </motion.div>
         </div>
-      </motion.section>
+      </section>
 
-      {/* ─── 6. FOOTER ─── */}
-      <footer className="border-t border-slate-200 px-6 md:px-8 lg:px-16 xl:px-24 py-8 flex justify-between flex-wrap gap-4 bg-white">
-        <div className="text-sm text-slate-400">
-          &copy; {new Date().getFullYear()} Launchpad. All rights reserved.
-        </div>
-        <nav className="flex gap-6">
-          {[
-            { label: 'Platform', href: '/platform' },
-            { label: 'Results', href: '/results' },
-            { label: 'Contact', href: '/contact' },
-            { label: 'Privacy', href: '/privacy' },
-          ].map((lnk) => (
-            <Link
-              key={lnk.href}
-              href={lnk.href}
-              className="text-sm text-slate-400 hover:text-slate-900 transition-colors duration-200"
-            >
-              {lnk.label}
-            </Link>
-          ))}
-        </nav>
-      </footer>
+      <Footer />
     </>
   )
 }
