@@ -1,11 +1,42 @@
 'use client'
 
+import { useEffect, useRef } from 'react'
 import Link from 'next/link'
-import Script from 'next/script'
 import { Footer, ArrowIcon, useScrollReveal } from '../layout'
+
+declare global {
+  interface Window { Calendly?: { initInlineWidget: (opts: { url: string; parentElement: HTMLElement }) => void } }
+}
 
 export default function ContactPage() {
   useScrollReveal()
+  const calRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const url = process.env.NEXT_PUBLIC_CALENDLY_URL
+    if (!url) return
+
+    function init() {
+      if (window.Calendly && calRef.current) {
+        calRef.current.innerHTML = ''
+        window.Calendly.initInlineWidget({ url: url!, parentElement: calRef.current! })
+      }
+    }
+
+    if (window.Calendly) {
+      init()
+    } else {
+      const css = document.createElement('link')
+      css.rel = 'stylesheet'
+      css.href = 'https://assets.calendly.com/assets/external/widget.css'
+      document.head.appendChild(css)
+
+      const script = document.createElement('script')
+      script.src = 'https://assets.calendly.com/assets/external/widget.js'
+      script.onload = init
+      document.body.appendChild(script)
+    }
+  }, [])
 
   return (
     <>
@@ -80,13 +111,7 @@ export default function ContactPage() {
             <div style={{ fontFamily: 'var(--fs)', fontSize: '1.3rem', fontWeight: 400, fontStyle: 'italic', color: 'var(--ink)', marginBottom: '.3rem' }}>Pick a time.</div>
             <div style={{ fontSize: '.62rem', color: 'var(--dim)', lineHeight: 1.7 }}>45 minutes, no obligation. We&apos;ll confirm via email.</div>
           </div>
-          <div style={{ flex: 1, minHeight: '900px', margin: '0 1.5rem 1.5rem', background: 'var(--w)' }}>
-            <div
-              className="calendly-inline-widget"
-              data-url={process.env.NEXT_PUBLIC_CALENDLY_URL}
-              style={{ minWidth: '280px', height: '100%', minHeight: '900px' }}
-            />
-          </div>
+          <div ref={calRef} style={{ flex: 1, minHeight: '900px', margin: '0 1.5rem 1.5rem', background: 'var(--w)' }} />
         </div>
       </div>
 
@@ -101,8 +126,6 @@ export default function ContactPage() {
 
       <Footer />
 
-      <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
-      <Script src="https://assets.calendly.com/assets/external/widget.js" strategy="lazyOnload" />
     </>
   )
 }
