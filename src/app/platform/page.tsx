@@ -28,11 +28,14 @@ export default function PlatformPage() {
             <div className="bc-label">Keyword Rankings — Illustrative</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 0, marginTop: '.5rem' }}>
               {[
-                { pos: '1', kw: 'personal injury lawyer miami', change: '▲ 4', up: true },
-                { pos: '2', kw: 'accident attorney hialeah', change: '▲ 7', up: true },
-                { pos: '3', kw: 'car accident lawyer near me', change: '▼ 1', up: false },
-                { pos: '5', kw: 'abogado de accidentes', change: '▲ 12', up: true },
-                { pos: '4', kw: 'slip and fall attorney fl', change: '—', up: false },
+                { pos: '#1', kw: 'plumber near me', change: '▲ +2', up: true },
+                { pos: '#2', kw: 'emergency plumbing', change: '▲ +5', up: true },
+                { pos: '#1', kw: 'hvac repair [city]', change: '— 0', up: false },
+                { pos: '#3', kw: 'best local plumber', change: '▲ +1', up: true },
+                { pos: '#2', kw: 'ac installation', change: '▲ +3', up: true },
+                { pos: '#1', kw: 'water heater repair', change: '▲ +4', up: true },
+                { pos: '#4', kw: 'drain cleaning service', change: '▼ -1', up: false },
+                { pos: '#2', kw: 'roof repair near me', change: '▲ +6', up: true },
               ].map((r, i) => (
                 <div key={i} className="rr">
                   <div className="rr-pos">{r.pos}</div>
@@ -46,43 +49,81 @@ export default function PlatformPage() {
             <div className="bc-label">Lead Funnel — This Month</div>
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '5px', padding: '.5rem 0', marginTop: '.5rem' }}>
               {[
-                { label: 'Impressions', w: '95%', val: '24,800' },
-                { label: 'Clicks', w: '65%', val: '3,420' },
-                { label: 'Leads', w: '35%', val: '412' },
-                { label: 'Qualified', w: '20%', val: '187' },
-                { label: 'Closed', w: '10%', val: '38' },
-              ].map((f, i) => (
-                <div key={i} className="fb-step" style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
-                  <div style={{ height: '34px', background: 'var(--org)', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '2px', width: f.w, transition: 'width 1.2s cubic-bezier(.22,1,.36,1)' }}>
-                    <span style={{ fontSize: '.5rem', fontWeight: 500, color: '#fff', letterSpacing: '.07em', textTransform: 'uppercase', whiteSpace: 'nowrap', padding: '0 12px' }}>{f.label} · {f.val}</span>
+                { label: 'Impressions', w: '95%', val: '48,200' },
+                { label: 'Clicks', w: '60%', val: '6,340' },
+                { label: 'Leads', w: '32%', val: '842' },
+                { label: 'Customers', w: '18%', val: '127' },
+              ].map((f, i, arr) => (
+                <div key={i} style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                  <div style={{ height: '36px', background: 'var(--org)', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '3px', width: f.w, transition: 'width 1.2s cubic-bezier(.22,1,.36,1)' }}>
+                    <span style={{ fontSize: '.52rem', fontWeight: 500, color: '#fff', letterSpacing: '.07em', textTransform: 'uppercase', whiteSpace: 'nowrap', padding: '0 12px' }}>{f.val} {f.label}</span>
                   </div>
+                  {i < arr.length - 1 && (
+                    <div style={{ color: 'rgba(255,255,255,.15)', fontSize: '.6rem', lineHeight: 1, padding: '3px 0' }}>▼</div>
+                  )}
                 </div>
               ))}
             </div>
           </div>
           <div className="bc">
             <div className="bc-label">Channel Mix</div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', marginTop: '.8rem' }}>
-              {[
-                { color: 'var(--org)', label: 'Organic SEO', val: '38%' },
-                { color: 'var(--blue)', label: 'Google Ads', val: '28%' },
-                { color: 'var(--purple)', label: 'Meta Ads', val: '18%' },
-                { color: 'var(--yellow)', label: 'Referral', val: '10%' },
-                { color: 'var(--pink)', label: 'LSA', val: '6%' },
-              ].map((c, i) => (
-                <div key={i} className="dl-item">
-                  <div className="dl-dot" style={{ width: '7px', height: '7px', borderRadius: '1px', flexShrink: 0, background: c.color }} />
-                  <div className="dl-lbl">{c.label}</div>
-                  <div className="dl-val">{c.val}</div>
-                </div>
-              ))}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1.2rem', marginTop: '1rem' }}>
+              {/* Donut Chart SVG */}
+              <svg width="90" height="90" viewBox="0 0 90 90" style={{ flexShrink: 0 }}>
+                <circle cx="45" cy="45" r="32" fill="none" stroke="rgba(255,255,255,.06)" strokeWidth="12" />
+                {/* Google Search 35% - teal */}
+                <circle cx="45" cy="45" r="32" fill="none" stroke="#0d9488" strokeWidth="12"
+                  strokeDasharray={`${0.35 * 201} ${201}`} strokeDashoffset="0"
+                  transform="rotate(-90 45 45)" strokeLinecap="butt" />
+                {/* Meta Ads 25% - blue */}
+                <circle cx="45" cy="45" r="32" fill="none" stroke="#3b82f6" strokeWidth="12"
+                  strokeDasharray={`${0.25 * 201} ${201}`} strokeDashoffset={`${-0.35 * 201}`}
+                  transform="rotate(-90 45 45)" strokeLinecap="butt" />
+                {/* LSA 22% - green */}
+                <circle cx="45" cy="45" r="32" fill="none" stroke="#22c55e" strokeWidth="12"
+                  strokeDasharray={`${0.22 * 201} ${201}`} strokeDashoffset={`${-0.60 * 201}`}
+                  transform="rotate(-90 45 45)" strokeLinecap="butt" />
+                {/* Local SEO 18% - gray */}
+                <circle cx="45" cy="45" r="32" fill="none" stroke="#6b7280" strokeWidth="12"
+                  strokeDasharray={`${0.18 * 201} ${201}`} strokeDashoffset={`${-0.82 * 201}`}
+                  transform="rotate(-90 45 45)" strokeLinecap="butt" />
+                <text x="45" y="49" textAnchor="middle" fill="#fff" fontSize="18" fontFamily="var(--fs)" fontWeight="400">6</text>
+              </svg>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
+                {[
+                  { color: '#0d9488', label: 'Google Search', val: '35%' },
+                  { color: '#3b82f6', label: 'Meta Ads', val: '25%' },
+                  { color: '#22c55e', label: 'Local Service Ads', val: '22%' },
+                  { color: '#6b7280', label: 'Local SEO', val: '18%' },
+                ].map((c, i) => (
+                  <div key={i} className="dl-item">
+                    <div style={{ width: '8px', height: '8px', borderRadius: '2px', flexShrink: 0, background: c.color }} />
+                    <div className="dl-lbl">{c.label}</div>
+                    <div className="dl-val">{c.val}</div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
           <div className="bc">
             <div className="bc-label">Average ROI</div>
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '.6rem 0', marginTop: '.4rem' }}>
-              <div style={{ fontFamily: 'var(--fs)', fontSize: '1.8rem', fontWeight: 400, color: '#fff', letterSpacing: '-.04em' }}>5.2x</div>
-              <div style={{ fontSize: '.5rem', color: 'rgba(255,255,255,.25)', textTransform: 'uppercase', letterSpacing: '.1em', marginTop: '.7rem' }}>Across all campaigns</div>
+              {/* Gauge SVG */}
+              <svg width="140" height="80" viewBox="0 0 140 80" style={{ overflow: 'visible' }}>
+                {/* Background arc */}
+                <path d="M 15 75 A 55 55 0 0 1 125 75" fill="none" stroke="rgba(255,255,255,.08)" strokeWidth="10" strokeLinecap="round" />
+                {/* Filled arc ~75% of semicircle */}
+                <path d="M 15 75 A 55 55 0 0 1 125 75" fill="none" stroke="url(#gaugeGrad)" strokeWidth="10" strokeLinecap="round"
+                  strokeDasharray="173" strokeDashoffset="43" />
+                <defs>
+                  <linearGradient id="gaugeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="#0d9488" />
+                    <stop offset="100%" stopColor="#5eead4" />
+                  </linearGradient>
+                </defs>
+                <text x="70" y="68" textAnchor="middle" fill="#fff" fontSize="28" fontFamily="var(--fs)" fontWeight="400" letterSpacing="-0.04em">5.2x</text>
+              </svg>
+              <div style={{ fontSize: '.5rem', color: 'rgba(255,255,255,.25)', textTransform: 'uppercase', letterSpacing: '.1em', marginTop: '.5rem' }}>Across all campaigns</div>
             </div>
           </div>
           <div className="bc">
